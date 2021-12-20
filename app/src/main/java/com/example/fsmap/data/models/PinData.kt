@@ -1,4 +1,4 @@
-package com.example.fsmaplibrary.data
+package com.example.fsmap.data.models
 
 data class PinData(
     val name: String,
