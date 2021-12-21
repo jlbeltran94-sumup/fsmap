@@ -27,7 +27,6 @@ class MapInteractorImpl(override var googleMap: GoogleMap?) : MapInteractor {
                 data.firstOrNull()?.position?.let {
                     moveCamera(CameraUpdateFactory.newLatLng(it))
                 }
-
             }
         } ?: kotlin.run {
             throw MapNotDefinedException("Map is not set")

@@ -1,4 +1,4 @@
-package com.example.fsmap
+package com.example.fsmap.domain
 
 import com.example.fsmap.data.models.PinData
 import com.example.fsmaplibrary.utils.MarkerIconResourceProvider
@@ -8,6 +8,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
 class MarkerOptionMapperImpl : MarkerOptionMapper<PinData> {
+
     override fun createMarkerOption(data: PinData): MarkerOptions =
         with(data) {
             MarkerOptions()
@@ -17,9 +18,7 @@ class MarkerOptionMapperImpl : MarkerOptionMapper<PinData> {
                 .infoWindowAnchor(0.5F, 0.5F)
                 .icon(
                     BitmapDescriptorFactory.fromResource(
-                        MarkerIconResourceProvider.getIconForType(
-                            type
-                        )
+                        MarkerIconResourceProvider.getIconForType(type)
                     )
                 )
         }

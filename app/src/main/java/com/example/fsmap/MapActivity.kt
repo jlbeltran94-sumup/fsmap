@@ -3,6 +3,7 @@ package com.example.fsmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.fsmap.data.models.PinData
+import com.example.fsmap.domain.MarkerOptionMapperImpl
 import com.example.fsmaplibrary.mapinteractor.*
 import com.example.fsmaplibrary.utils.MarkerOptionMapper
 import com.google.android.gms.maps.GoogleMap
