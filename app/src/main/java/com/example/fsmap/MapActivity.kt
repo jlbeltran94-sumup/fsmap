@@ -22,22 +22,21 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(map: GoogleMap) {
         mapInteractor.googleMap = map
-        mapInteractor.addData(markerOptionMapper.createMarkerOptions(mockData), true)
+        mapInteractor.addData(markerOptionMapper.createMarkerOption(mockData), true)
         mapInteractor.addData(markerOptionMapper.createMarkerOptions(mockData2), true)
         mapInteractor.addData(markerOptionMapper.createMarkerOptions(mockData3), true)
     }
 }
 
-val mockData = listOf<PinData>(
-    PinData(
+val mockData = PinData(
         name = "test adelaide",
         type = "restaurant",
         lat = -34.92873,
         lng = 138.59995,
         phone = 123456789,
         address = "ADELAIDE"
-    )
 )
+
 val mockData2 = listOf<PinData>(
     PinData(
         name = "test sidney",
