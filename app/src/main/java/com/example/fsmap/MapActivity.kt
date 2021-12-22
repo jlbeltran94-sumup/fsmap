@@ -1,18 +1,25 @@
 package com.example.fsmap
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.fsmap.data.models.PinData
-import com.example.fsmap.domain.MarkerOptionMapperImpl
-import com.example.fsmaplibrary.mapinteractor.*
+import com.example.fsmaplibrary.mapinteractor.MapInteractor
 import com.example.fsmaplibrary.utils.MarkerOptionMapper
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MapActivity : AppCompatActivity(), OnMapReadyCallback {
-    private var mapInteractor: MapInteractor = MapInteractorImpl(null)
-    private val markerOptionMapper: MarkerOptionMapper<PinData> by lazy { MarkerOptionMapperImpl() }
+
+    @Inject
+    lateinit var mapInteractor: MapInteractor
+
+    @Inject
+    lateinit var markerOptionMapper: MarkerOptionMapper<PinData>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map)
@@ -29,12 +36,12 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 }
 
 val mockData = PinData(
-        name = "test adelaide",
-        type = "restaurant",
-        lat = -34.92873,
-        lng = 138.59995,
-        phone = 123456789,
-        address = "ADELAIDE"
+    name = "test adelaide",
+    type = "restaurant",
+    lat = -34.92873,
+    lng = 138.59995,
+    phone = 123456789,
+    address = "ADELAIDE"
 )
 
 val mockData2 = listOf<PinData>(
