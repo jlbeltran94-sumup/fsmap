@@ -2,6 +2,7 @@ package com.example.fsmap
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -24,16 +25,13 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
-    @Inject
-    lateinit var mapInteractor: MapInteractor
-
-    @Inject
-    lateinit var markerOptionMapper: MarkerOptionMapper<PinData>
+    private val mapViewModel: MapViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,10 +41,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     override fun onMapReady(map: GoogleMap) {
-        mapInteractor.googleMap = map
-        mapInteractor.addData(markerOptionMapper.createMarkerOption(mockData), true)
-        mapInteractor.addData(markerOptionMapper.createMarkerOptions(mockData2), true)
-        mapInteractor.addData(markerOptionMapper.createMarkerOptions(mockData3), true)
+        mapViewModel.getData(map)
     }
 }
 
@@ -102,33 +97,3 @@ fun MapActivityContent(onMapReadyCallback: OnMapReadyCallback) {
         }
     }
 }
-
-val mockData = PinData(
-    name = "test adelaide",
-    type = "restaurant",
-    lat = -34.92873,
-    lng = 138.59995,
-    phone = 123456789,
-    address = "ADELAIDE"
-)
-
-val mockData2 = listOf<PinData>(
-    PinData(
-        name = "test sidney",
-        type = "shop",
-        lat = -33.87365,
-        lng = 151.20689,
-        phone = 123456789,
-        address = "SIDNEY"
-    )
-)
-val mockData3 = listOf<PinData>(
-    PinData(
-        name = "test melbourne",
-        type = "def",
-        lat = -37.81319,
-        lng = 144.96298,
-        phone = 123456789,
-        address = "MELBOURNE"
-    )
-)
