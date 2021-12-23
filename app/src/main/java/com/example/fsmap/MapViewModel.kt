@@ -22,7 +22,8 @@ class MapViewModel @Inject constructor(
         mapInteractor.googleMap = googleMap
         viewModelScope.launch {
             val data = fakeService.provideMockData()
-            mapInteractor.addData(markerOptionMapper.createMarkerOptions(data), true)
+            val markerOptions = markerOptionMapper.createMarkerOptions(data)
+            mapInteractor.addData(markerOptions, true)
         }
     }
 
